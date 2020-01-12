@@ -1,6 +1,10 @@
 import time
+import sys
 
-file = open("data.txt", "r")
+if len(sys.argv) > 1:
+    file = open(sys.argv[1], "r")
+else:
+    file = open("data.txt", "r")
 data = list(map(int, file.read().split(" ")))
 start_time = time.time()
 
