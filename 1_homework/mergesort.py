@@ -51,4 +51,14 @@ def mergeSort(array):
 
 # call function on data and print time
 mergeSort(data)
-print("%s seconds" % (time.time() - start_time))
+# write data to file
+first = True
+with open("merge.txt", "w") as file:
+    for item in data:
+        if first:
+            file.write("%s" % item)
+            first = False
+        else:
+            file.write(" %s" % item)
+    file.write("\n")
+# print("%s seconds" % (time.time() - start_time))

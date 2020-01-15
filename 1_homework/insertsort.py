@@ -34,8 +34,16 @@ for i in range(len(uList)):
         if not insert:
             oList.insert(0, uList[i])
 
-# optional print sorted list
-# print(oList)
+# write data to file
+first = True
+with open("insert.txt", "w") as file:
+    for item in oList:
+        if first:
+            file.write("%s" % item)
+            first = False
+        else:
+            file.write(" %s" % item)
+    file.write("\n")
 
 # print sort time
-print("%s seconds" % (time.time() - start_time))
+# print("%s seconds" % (time.time() - start_time))

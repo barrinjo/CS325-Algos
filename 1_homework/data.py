@@ -3,7 +3,7 @@ import sys
 
 list = []
 for i in range(int(sys.argv[1])):
-    list.append(random.randint(1, 1000))
+    list.append(random.randint(0, 10000))
 
 first = True
 with open("data.txt", "w") as file:
