@@ -9,6 +9,7 @@ else:
 # read file and create list with " " as delimeter
 uList = list(map(int, file.read().split(" ")))
 # remove first index which we don't need in this program
+n = uList[0]
 del uList[0]
 oList = []
 
@@ -16,7 +17,7 @@ oList = []
 start_time = time.time()
 
 # iterate through unsorted list and sort items in the sorted list
-for i in range(len(uList)):
+for i in range(0, n):
     # if list is empty, add first item
     if(not len(oList)):
         oList.append(uList[i])
