@@ -15,18 +15,15 @@ del data[0]
 start_time = time.time()
 
 def mergeSort(array):
-    # if list is of length 1, no action is needed 
+    # if list is of length 3 or more, recursively merge like normal 
     if len(array) > 2:
         # floor length instead of divide in case len is odd number
         # split array into two arrays at index of floored length
-        print(array, len(array)//3)
         mid1 = len(array)//3
         mid2 = (len(array)//3)*2
-        # print(mid1, mid2)
         left = array[:mid1]
         center = array[mid1:mid2]
         right = array[mid2:]
-        # print(left, center, right)
 
         # recursively call mergeSort on each split list
         mergeSort(left)
@@ -35,8 +32,10 @@ def mergeSort(array):
 
         # setup iterators for merge operation
         iter = i = j = k = 0
-        # merge as long as iterators are smaller than array sizes
+        # merge is based on which arrays have unsorted items left
+        # first loop assumes that all arrays have unsorted items left
         while i < len(left) and j < len(right) and k < len(center):
+            # whichever array has the lowest integer, add that to the sorted array and iterate
             if left[i] <= right[j] and left[i] <= center[k]:
                 array[iter] = left[i]
                 i += 1
@@ -48,6 +47,8 @@ def mergeSort(array):
                 k += 1
             iter += 1
         
+        # 1 loop for each condition once one of the arrays is empty
+        # first goes if the center array is empty
         while i < len(left) and j < len(right):
             if left[i] <= right[j]:
                 array[iter] = left[i]
@@ -57,6 +58,7 @@ def mergeSort(array):
                 j += 1
             iter += 1
 
+        # second goes if the left array is empty
         while j < len(right) and k < len(center):
             if right[j] <= center[k]:
                 array[iter] = right[j]
@@ -66,6 +68,7 @@ def mergeSort(array):
                 k += 1
             iter += 1
 
+        # last goes if the right array is empty
         while i < len(left) and k < len(center):
             if left[i] <= center[k]:
                 array[iter] = left[i]
@@ -75,6 +78,8 @@ def mergeSort(array):
                 k += 1
             iter += 1
 
+        # last three loops are simple
+        # there is nothing left to compare, adding the rest of the items from whichever array is left
         while i < len(left):
             array[iter] = left[i]
             i += 1
@@ -89,8 +94,10 @@ def mergeSort(array):
             array[iter] = center[k]
             k += 1
             iter += 1
+    # if array length is 2, just sort them
+    # no case for array of len 1 because we just leave it alone
     elif len(array) == 2:
-        if array[1] > array[0]:
+        if array[1] < array[0]:
             temp = array[0]
             array[0] = array[1]
             array[1] = temp
@@ -98,15 +105,14 @@ def mergeSort(array):
 
 # call function on data and print time
 mergeSort(data)
-print(data)
 # write data to file
-# first = True
-# with open("merge.txt", "w") as file:
-#     for item in data:
-#         if first:
-#             file.write("%s" % item)
-#             first = False
-#         else:
-#             file.write(" %s" % item)
-#     file.write("\n")
+first = True
+with open("merge3.txt", "w") as file:
+    for item in data:
+        if first:
+            file.write("%s" % item)
+            first = False
+        else:
+            file.write(" %s" % item)
+    file.write("\n")
 # print("%s seconds" % (time.time() - start_time))
