@@ -1,0 +1,179 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{CS325 Homework 2}
+\author{Joshua Barringer}
+\date{24 January 2020}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{a) $T(n) = T(n - 2) + n$}
+
+Solved by the substitution method:
+
+\[
+    T(n)
+    \begin{cases} 
+      1 & n = 0 \\
+      T(n) = T(n - 2) + n & n > 0
+   \end{cases}
+\]
+
+$T(n) = T(n - 2) + n$
+
+$T(n) = [T(n - 4) + n] + n$
+
+$T(n) = T(n - 4) + 2n$
+
+$T(n) = [T(n - 6) + n] + 2n$
+
+$T(n) = T(n - 6) + 3n$
+
+$\;\;\;\vdots$
+
+$T(n) = T(n - 2k) + kn$
+
+Set $n - 2k$ to be equal to zero, which is the base case:
+
+$n - 2k = 0$
+
+$n = 2k$
+
+$k = \frac{1}{2}n$
+
+Plug result back into the function:
+
+$T(n) = T(n - 2(\frac{1}{2}n)) + (\frac{1}{2}n)n$
+
+$T(n) = T(0) + \frac{1}{2}n^2$
+
+$T(n) = 1 + \frac{1}{2}n^2$
+
+$\therefore$  \boxed{T(n) = \Theta(n^2)}
+
+\subsection*{b) $T(n) = 4T(\frac{n}{2}) + n^3$}
+
+Solved using master theorem:
+
+$T(n) = aT(n/b) + f(n)$
+
+$\therefore a = 4, b = 2$ and $f(n) = n^3$
+
+\subsubsection*{1. If $f(n) = O(n^{log_ba - \epsilon})$ for some constant $\epsilon \geq  0$, then $T(n) = \Theta(n^{log_ba})$.}
+
+$\vdots$
+
+$log_ba = log_24 = 2$
+
+$n^3 \neq O(n^{2 - \epsilon})$
+
+\subsubsection*{2. If $f(n) = \Theta(n^{log_ba})$, then $T(n) = \Theta(n^{log_ba}lgn)$.}
+
+$\vdots$
+
+$n^3 \neq \Theta n^2$
+
+\subsubsection*{3. If $f(n) = \Omega(n^{log_ba + \epsilon})$ for some constant $\epsilon > 0$, and if $af(n/b) \leq cf(n)$ for some constant $c < 1$ and all sufficiently large $n$, then $T(n) = \Theta(f(n))$.}
+
+$\vdots$
+
+$n^3 = \Omega(n^{2 + \epsilon})$
+
+$\therefore$ \boxed{T(n) = \Theta(n^3)} due to the third rule of the Master Theorem.
+
+\subsection*{c) $T(n) = 9T(\frac{n}{3}) + n^2$}
+
+Solved using master theorem:
+
+$T(n) = aT(n/b) + f(n)$
+
+$\therefore a = 9, b = 3$ and $f(n) = n^2$
+
+\subsubsection*{1. If $f(n) = O(n^{log_ba - \epsilon})$ for some constant $\epsilon \geq  0$, then $T(n) = \Theta(n^{log_ba})$.}
+
+$\vdots$
+
+$log_ba = log_39 = 2$
+
+$n^3 \neq O(n^{2 - \epsilon})$
+
+\subsubsection*{2. If $f(n) = \Theta(n^{log_ba})$, then $T(n) = \Theta(n^{log_ba}lgn)$.}
+
+$\vdots$
+
+$n^3 = \Theta n^2$
+
+$\therefore$ \boxed{T(n) = \Theta(n^2lgn)} due to the second rule of the Master Theorem.
+
+\section*{Problem 2}
+
+\[T(n) = 4T(\frac{n}{3}) + n + 1\]
+
+$T(n) = aT(n/b) + f(n)$
+
+$\therefore a = 4, b = 3$ and $f(n) = n + 1$
+
+$log_34 = 1.2619$
+
+$n + 1 = O(n^{1.2619 - \epsilon})$
+
+$\therefore$ \boxed{T(n) = \Theta(n^{log_34}) = \Theta(n^{1.2619})}
+
+\section*{Problem 3}
+
+\subsection*{a)}
+
+\begin{verbatim}
+
+    search(left, right) {
+        if(right > 1) {
+        size = right - left
+        mid_left = size/3 + l
+        mid_right = size/3 + 2l
+            if(data[mid_left] == target) {
+                return mid_left
+            }
+            if(data[mid_right] == target) {
+                return mid_right
+            }
+            else {
+                search(left, mid_left)
+                search(mid_left, mid_right)
+                search(mid_right, right)
+            }
+        } else {
+            return n
+        }
+    }
+    
+\end{verbatim}
+
+\subsection*{b) $T(n) = 3T(n/3) + 2$}
+
+Solved using master theorem:
+
+$T(n) = aT(n/b) + f(n)$
+
+$\therefore a = 3, b = 3$ and $f(n) = 2$
+
+\subsubsection*{1. If $f(n) = O(n^{log_ba - \epsilon})$ for some constant $\epsilon \geq  0$, then $T(n) = \Theta(n^{log_ba})$.}
+
+$\vdots$
+
+$log_ba = log_33 = 1$
+
+$2 = O(n^{1 - \epsilon})$
+
+\therefore \boxed{T(n) = \Theta(n)}
+
+\subsection*{c)}
+
+\section*{Problem 4}
+
+\end{document}
