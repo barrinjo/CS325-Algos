@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{CS325 Homework 3}
+\author{Josuha Barringer \\ Prof. Schutfort}
+\date{7 February 2020}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1: Rod Cutting}
+
+We define a rod with length 3, whose length prices are as follows, [1, 8, 10].  Using the greedy algorithm, the value per inch for each length would be [$\frac{1}{1}$, $\frac{8}{2}$, $\frac{10}{3}$], or [1, 4, 3.$\overline{333}$].  The greedy algorithm would first cut off a rod of length 2, since it has the highest value per inch of 4.  The remaining 1 inch cannot be cut any more, so the algorithm would finish with a total value of 9.  The actual highest possible value would be to use no cuts and end with a total value of 10.  Clearly, the "greedy" strategy doesn't work in this situation.
+
+\section*{Problem 2: Modified Rod Cutting}
+
+I modified the book's Bottom-Up-Cut-Rod Method for this problem:\\
+
+\textsc{Bottom-Up-Cut-Rod$(p,n,cut\_price)$}
+
+    \begin{verbatim}
+        1 let r[0..n] be a new array
+        2 r[0] = 0
+        3 for j = 1 to n
+        4     q = -infinity
+        5     for i = 1 to j
+        6         q = max(q, p[i] + r[j - i] - cut_price)
+        7     r[j] - q
+        8 return r[n]
+    \end{verbatim}
+    
+This modified algorithm takes a third argument, "cut\_price".  On line 6, the previous max variable q is now compared with the proposed new cut summed with the memo lookup for length optimization for the remaining piece, \textit{with the price of the cut subtracted from the total}.  This modification should allow custom cut prices, as well as account for the cut price during the rod cutting optimization.
+
+\section*{Problem 3}
+
+\section*{Problem 4}
+
+\end{document}

@@ -5,7 +5,7 @@ import random
 print("n | seconds")
 
 # test n sizes from 1,000 to 15,000, at 1,000 size intervals 
-for n in range(1000, 16000, 1000):
+for n in range(10000, 160000, 10000):
     data = []
     # fill list with random numbers between 1 and 10,000
     for i in range(n):
@@ -52,4 +52,4 @@ for n in range(1000, 16000, 1000):
     # call function on data and print time
     mergeSort(data)
     # print data size and sort time
-    print(n, "|", time.time() - start_time)
+    print(time.time() - start_time)
