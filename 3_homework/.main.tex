@@ -37,6 +37,51 @@ This modified algorithm takes a third argument, "cut\_price".  On line 6, the pr
 
 \section*{Problem 3}
 
+\subsection*{a)}
+
+\subsubsection*{Recursive 0-1 Knapsack:}
+
+The greedy strategy doesn't work for 0-1 knapsack like it does with fractional knapsack, so the recursion can't rely on wt/val ratios.  Starting with the arguments W (weight available), val[] (item values), wt[] (item weights), and i (number of items), we need to first check that the item i can fit in the knapsack at all, otherwise we will fail the problem.  If we've verified the item can fit in the knapsack, we will recursively take the max value between the value of the knapsack if we include item i, and if we don't.  The recursive pattern will be i-1, since we must check every possible item.\\
+
+\textsc{Recursive Knapsack$(W, val[], wt[], i)$}
+
+\begin{verbatim}
+    1 if(W < wt[i])
+    2     return knapsack(W, val[], wt[], i-1)
+    3 else
+    4     return max(knapsack(W, val[], wt[], i-1),
+    5               val[i] + knapsack(W-wt[i], val[], wt[], i-1))
+\end{verbatim}
+
+\subsubsection*{Dynamic Programming 0-1 Knapsack:}
+
+For the dynamic programming solution to the knapsack problem, we need to iterate through W and i, and at each new location in the 2D array, evaluate that location's value.  Firstly, we'll allocate a memo of that is [W + 1][i + 1] to create an outside bound for the 2D array. If W or i is equal to zero, the location value will be zero as well.  Next, we will check if the item can fit in the knapsack with the given weight.  If the item does not fit, then the value in the current location will be the same as the value for the previous item(i-1) of the same weight (w).  Finally, if the item can fit in knapsack at the given weight, then we have to take the max of two values: the value of the previous item (i-1) of the same weight (w), or the value of our proposed new item (val[i]) summed with the value of the previous items (i-1) of a new weight including the new item (w-wt[i]).  Whichever of those two is of greater value will be the value at this location.  This algorithm will result in the greatest optimization for the 0-1 knapsack problem.
+
+\textsc{DP Knapsack$(W, wt[], val[], item)$}
+
+\begin{verbatim}
+    1 memo = int[W + 1][i + 1]
+    2 for(i = 0; i < i+1; i++) {
+    3     for(w = 0; w < W + 1; w++)
+    4         if(w == 0 || i == 0)
+    5             memo[i][w] = 0
+    6         else if (wt[i] > W)
+    7             memo[i][w] = memo[i - 1][w]
+    8         else
+    9             memo[i][w] = max(memo[i - 1]j[w],
+    10                         val[i] + memo[i - 1][w - wt[i]])
+\end{verbatim}
+
+\begin{verbatim}
+    
+\end{verbatim}
+
+\subsection*{b)}
+
+\subsection*{c)}
+
+\subsection*{d)}
+
 \section*{Problem 4}
 
 \end{document}
