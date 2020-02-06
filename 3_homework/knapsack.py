@@ -24,23 +24,26 @@ def recursion(W, wt, val, i):
         return max(recursion(W, wt, val, i - 1),
         val[i - 1] + recursion(W-wt[i-1], wt, val, i - 1))
 
-for i in range(10, 32, 2):
-    wt_DP = []
-    val_DP = []
-    for j in range(i):
-        wt_DP.append(random.randint(1, 20))
-        val_DP.append(random.randint(1, 100))
-    wt_rec = wt_DP.copy()
-    val_rec = val_DP.copy()
+for W in range(30, 150, 30):
+    for i in range(10, 32, 2):
+        wt_DP = []
+        val_DP = []
+        for j in range(i):
+            wt_DP.append(random.randint(1, 20))
+            val_DP.append(random.randint(1, 100))
+        wt_rec = wt_DP.copy()
+        val_rec = val_DP.copy()
 
-    print("N={} W = 100 || ".format(i), end=" ")
-    rec_time = time.time()
-    print("Rec Max = {}".format(recursion(100, wt_rec, val_rec, i)), end = " ")
-    print("Rec time = {} || ".format("%.5f" % (time.time() - rec_time)), end=" ")
-    dp_time = time.time()
-    print("DP Max = {}".format(DP(100, wt_DP, val_DP, i)), end=" ")
-    print("DP time = {}".format("%.5f" % (time.time() - dp_time)))
+        print("N={} W = {} || ".format(i, W))
+        rec_time = time.time()
+        # print("Rec Max = {}".format(recursion(100, wt_rec, val_rec, i)), end = " ")
+        recursion(W, wt_rec, val_rec, i)
+        print("{}".format("%.5f" % (time.time() - rec_time)))
+        dp_time = time.time()
+        # print("DP Max = {}".format(DP(100, wt_DP, val_DP, i)), end=" ")
+        DP(W, wt_DP, val_DP, i)
+        print("{}".format("%.5f" % (time.time() - dp_time)))
 
 
-    start_time = time.time()
-    DP
+        start_time = time.time()
+        DP

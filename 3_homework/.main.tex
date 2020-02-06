@@ -60,15 +60,15 @@ For the dynamic programming solution to the knapsack problem, we need to iterate
 \textsc{DP Knapsack$(W, wt[], val[], item)$}
 
 \begin{verbatim}
-    1 memo = int[W + 1][i + 1]
-    2 for(i = 0; i < i+1; i++) {
+    1 memo = [W + 1][i + 1]
+    2 for(i = 0; i < item + 1; i++) {
     3     for(w = 0; w < W + 1; w++)
     4         if(w == 0 || i == 0)
     5             memo[i][w] = 0
     6         else if (wt[i] > W)
     7             memo[i][w] = memo[i - 1][w]
     8         else
-    9             memo[i][w] = max(memo[i - 1]j[w],
+    9             memo[i][w] = max(memo[i - 1][w],
     10                         val[i] + memo[i - 1][w - wt[i]])
 \end{verbatim}
 
@@ -76,9 +76,127 @@ For the dynamic programming solution to the knapsack problem, we need to iterate
     
 \end{verbatim}
 
-\subsection*{b)}
-
 \subsection*{c)}
+
+    \begin{center}
+        \begin{tabular}{||c c c c||} 
+        \hline
+        n & W & Rec time(s) & DP time(s) \\ [0.5ex] 
+        \hline\hline
+        10 & 30 & 0.00011 & 0.0001 \\
+        \hline
+        12 & 30 & 0.00005 & 0.00016 \\
+        \hline
+        14 & 30 & 0.00078 & 0.00013 \\
+        \hline
+        16 & 30 & 0.00225 & 0.00015 \\
+        \hline
+        18 & 30 & 0.00053 & 0.00021 \\
+        \hline
+        20 & 30 & 0.00291 & 0.00019 \\
+        \hline
+        22 & 30 & 0.00198 & 0.00021 \\
+        \hline
+        24 & 30 & 0.01346 & 0.00023 \\
+        \hline
+        26 & 30 & 0.0012 & 0.00024 \\
+        \hline
+        28 & 30 & 0.0032 & 0.00026 \\
+        \hline
+        30 & 30 & 0.00663 & 0.0003 \\
+        \hline\hline
+        10 & 60 & 0.00019 & 0.00028 \\
+        \hline
+        12 & 60 & 0.00073 & 0.00032 \\
+        \hline
+        14 & 60 & 0.00161 & 0.00026 \\
+        \hline
+        16 & 60 & 0.0019 & 0.0003 \\
+        \hline
+        18 & 60 & 0.01252 & 0.00034 \\
+        \hline
+        20 & 60 & 0.02574 & 0.00039 \\
+        \hline
+        22 & 60 & 0.07363 & 0.00044 \\
+        \hline
+        24 & 60 & 0.15368 & 0.00044 \\
+        \hline
+        26 & 60 & 0.33396 & 0.00049 \\
+        \hline
+        28 & 60 & 0.15877 & 0.00054 \\
+        \hline
+        30 & 60 & 1.03528 & 0.00057 \\
+        \hline\hline
+        10 & 90 & 0.00029 & 0.00027 \\
+        \hline
+        12 & 90 & 0.00125 & 0.00032 \\
+        \hline
+        14 & 90 & 0.00525 & 0.00038 \\
+        \hline
+        16 & 90 & 0.01597 & 0.00043 \\
+        \hline
+        18 & 90 & 0.03986 & 0.0005 \\
+        \hline
+        20 & 90 & 0.16315 & 0.00054 \\
+        \hline
+        22 & 90 & 0.41266 & 0.00063 \\
+        \hline
+        24 & 90 & 0.76616 & 0.00134 \\
+        \hline
+        26 & 90 & 3.33157 & 0.00076 \\
+        \hline
+        28 & 90 & 4.93452 & 0.0008 \\
+        \hline
+        30 & 90 & 16.52896 & 0.00079 \\
+        \hline\hline
+        10 & 120 & 0.00033 & 0.00035 \\
+        \hline
+        12 & 120 & 0.00183 & 0.00055 \\
+        \hline
+        14 & 120 & 0.00563 & 0.00049 \\
+        \hline
+        16 & 120 & 0.02067 & 0.00056 \\
+        \hline
+        18 & 120 & 0.06837 & 0.00069 \\
+        \hline
+        20 & 120 & 0.17896 & 0.00071 \\
+        \hline
+        22 & 120 & 0.67432 & 0.00079 \\
+        \hline
+        24 & 120 & 3.29509 & 0.00085 \\
+        \hline
+        26 & 120 & 6.74058 & 0.00092 \\
+        \hline
+        28 & 120 & 26.70228 & 0.00105 \\
+        \hline
+        30 & 120 & 184.42888 & 0.00113\\
+        \hline
+        \end{tabular}
+    \end{center}
+    
+\subsubsection*{}
+
+\includegraphics[height=7cm]{dp w30.png}
+
+The line of best fit for the DP data was linear, $y = mx + b$.  This matches the predicted running time for the algorithm.  Since we only iterate over each memo space one time, the running time should be linear.  The line of best fit was \boxed{y = 0.00000859091x - 0.000036==263636}
+
+\includegraphics[height=7cm]{rec v dp W 30.png}
+
+The line of best fit for the recursive knapsack data is $y = am^x$.  This matches the prediction of an exponential growth for recursive knapsack.  The line of best fit is \boxed{y = 0.000024047x + 1.21762}
+
+\includegraphics[height=7cm]{W graphs dp.png}
+
+This graph shows the side by sides of all the dynamic programming knapsack data.  The lines are identifiable as follows: green, W=30; blue, W=60; yellow, W=90; black, W=120.  With each increase of W, the time it takes the dynamic programming algorithm to optimize the knapsack is linear, with the slope increasing slightly.
+
+\includegraphics[height=7cm]{W graphs recursive.png}
+
+This graph shows the side by sides of all the recursive knapsack data.  The lines are identifiable as follows: green, W=30; blue, W=60; yellow, W=90; black, W=120.  With each increase of W, the time it takes the recursive algorithm to optimize the knapsack stays exponential, with the growth rate increasing with each total weight increase.
+
+\subsubsection*{}
+
+\includegraphics[width=\linewidth]{total loglog.png}
+
+These 4 graphs show loglog growth-rate comparisons of the dynamic programming and recursive algorithm for each of the 4 W values. The graphs are identifiable as follows: green, W=30; blue, W=60; yellow, W=90; black, W=120.  It can be seen in each graph that no matter the W size, the recursive algorithm takes a significantly longer time to complete.  As W increases, the difference in growth rates increases as well.
 
 \subsection*{d)}
 
