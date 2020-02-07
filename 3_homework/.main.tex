@@ -3,6 +3,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{multicol}
+\setlength{\columnsep}{8cm}
 
 \title{CS325 Homework 3}
 \author{Josuha Barringer \\ Prof. Schutfort}
@@ -78,7 +80,8 @@ For the dynamic programming solution to the knapsack problem, we need to iterate
 
 \subsection*{c)}
 
-    \begin{center}
+\begin{multicols}{3}
+
         \begin{tabular}{||c c c c||} 
         \hline
         n & W & Rec time(s) & DP time(s) \\ [0.5ex] 
@@ -126,6 +129,12 @@ For the dynamic programming solution to the knapsack problem, we need to iterate
         28 & 60 & 0.15877 & 0.00054 \\
         \hline
         30 & 60 & 1.03528 & 0.00057 \\
+        \hline
+        \end{tabular}
+        
+        \begin{tabular}{||c c c c||} 
+        \hline
+        n & W & Rec time(s) & DP time(s) \\ [0.5ex] 
         \hline\hline
         10 & 90 & 0.00029 & 0.00027 \\
         \hline
@@ -172,7 +181,8 @@ For the dynamic programming solution to the knapsack problem, we need to iterate
         30 & 120 & 184.42888 & 0.00113\\
         \hline
         \end{tabular}
-    \end{center}
+
+\end{multicols}
     
 \subsubsection*{}
 
@@ -180,13 +190,19 @@ For the dynamic programming solution to the knapsack problem, we need to iterate
 
 The line of best fit for the DP data was linear, $y = mx + b$.  This matches the predicted running time for the algorithm.  Since we only iterate over each memo space one time, the running time should be linear.  The line of best fit was \boxed{y = 0.00000859091x - 0.000036==263636}
 
+\subsubsection*{}
+
 \includegraphics[height=7cm]{rec v dp W 30.png}
 
 The line of best fit for the recursive knapsack data is $y = am^x$.  This matches the prediction of an exponential growth for recursive knapsack.  The line of best fit is \boxed{y = 0.000024047x + 1.21762}
 
+\subsubsection*{}
+
 \includegraphics[height=7cm]{W graphs dp.png}
 
 This graph shows the side by sides of all the dynamic programming knapsack data.  The lines are identifiable as follows: green, W=30; blue, W=60; yellow, W=90; black, W=120.  With each increase of W, the time it takes the dynamic programming algorithm to optimize the knapsack is linear, with the slope increasing slightly.
+
+\subsubsection*{}
 
 \includegraphics[height=7cm]{W graphs recursive.png}
 
