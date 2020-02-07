@@ -57,7 +57,7 @@ The greedy strategy doesn't work for 0-1 knapsack like it does with fractional k
 
 \subsubsection*{Dynamic Programming 0-1 Knapsack:}
 
-For the dynamic programming solution to the knapsack problem, we need to iterate through W and i, and at each new location in the 2D array, evaluate that location's value.  Firstly, we'll allocate a memo of that is [W + 1][i + 1] to create an outside bound for the 2D array. If W or i is equal to zero, the location value will be zero as well.  Next, we will check if the item can fit in the knapsack with the given weight.  If the item does not fit, then the value in the current location will be the same as the value for the previous item(i-1) of the same weight (w).  Finally, if the item can fit in knapsack at the given weight, then we have to take the max of two values: the value of the previous item (i-1) of the same weight (w), or the value of our proposed new item (val[i]) summed with the value of the previous items (i-1) of a new weight including the new item (w-wt[i]).  Whichever of those two is of greater value will be the value at this location.  This algorithm will result in the greatest optimization for the 0-1 knapsack problem.
+For the dynamic programming solution to the knapsack problem, we need to iterate through W and i, and at each new location in the 2D array, evaluate that location's value.  Firstly, we'll allocate a memo of that is [W + 1][i + 1] to create an outside bound for the 2D array. If W or i is equal to zero, the location value will be zero as well.  Next, we will check if the item can fit in the knapsack with the given weight.  If the item does not fit, then the value in the current location will be the same as the value for the previous item(i-1) of the same weight (w).  Finally, if the item can fit in knapsack at the given weight, then we have to take the max of two values: the value of the previous item (i-1) of the same weight (w), or the value of our proposed new item (val[i]) summed with the value of the previous items (i-1) of a new weight including the new item (w-wt[i]).  Whichever of those two is of greater value will be the value at this location.  This algorithm will result in the greatest optimization for the 0-1 knapsack problem.\\
 
 \textsc{DP Knapsack$(W, wt[], val[], item)$}
 
@@ -189,7 +189,7 @@ For the dynamic programming solution to the knapsack problem, we need to iterate
 
 \includegraphics[height=7cm]{dp w30.png}
 
-The line of best fit for the DP data was linear, $y = mx + b$.  This matches the predicted running time for the algorithm.  Since we only iterate over each memo space one time, the running time should be linear.  The line of best fit was \boxed{y = 0.00000859091x - 0.000036==263636}
+The line of best fit for the DP data was linear, $y = mx + b$.  This matches the predicted running time for the algorithm.  Since we only iterate over each memo space one time, the running time should be linear.  The line of best fit was \boxed{y = 0.00000859091x - 0.0000263636}
 
 \subsubsection*{}
 
@@ -225,12 +225,14 @@ For the data collection, I used nested loops to test different values of n and W
 
 This problem is almost identical to the knapsack problem, so the pseudo-code will resemble it quite a bit.  We've got a list of items, with corresponding weights and values.  The main difference between 0-1 knapsack and shopping spree is that instead of optimizing one knapsack, we're optimizing F knapsacks.  To implement this code, all we have to do is loop the knapsack algorithm F times, using each family member's corresponding max weight value.  Once the knapsack code has run once for each family member, we sum the value to get the total optimized value for this problem.
 
+To get the items the family member needs to hold, we work backwards through the memo starting at the end.  If the value above our current space is the same, then the item we're currently on isn't included in the total.  If the value above our space is different, then the item is included, and we need to check the next item, subtracting the weight of the current item we're on.\\
+
 \textsc{Shopping Spree(F[], wt[], val[], item):}
     
 \begin{verbatim}
     1  subtotals = [F.length()]
     2  for(int f = 0; f < F.length(); f++)
-    3      memo[F[f]][item + 1]
+    3      memo[item + 1][F[f]]
     4      for(int i = 0; i < item + 1; i++)
     5          for(int w = 0; w < F[f]; w++)
     6              if(w == 0 || i == 0)
@@ -241,12 +243,16 @@ This problem is almost identical to the knapsack problem, so the pseudo-code wil
     11                 memo[i][w] = max(memo[i-1][w],
     12                 val[i] + memo[i-1][w-wt[i]])
     13     subtotals[f] = memo[F[f]][item]
-    14 return sum(subtotals)
+    14     for(int w = F[f]; w > 0; w++)
+    15         for(int i = item + 1; i > 0; i++)
+    16             if(memo[i][w] != memo[i-1][w])
+    17                 w -= wt[i]
+    18 return sum(subtotals)
                     
 \end{verbatim}
 
 \subsection*{b)}
 
-Since dynamic programming algorithms memoize previous problems, each combination of family member, weight, and item only need to be checked once each.  Because of this, the running time given N items, a family size of F, who can each carry M$_i$ pounds will be $O(NFM_i)$
+Since dynamic programming algorithms memoize previous problems, each combination of family member, weight, and item only need to be checked once each.  Because of this, the running time given N items, a family size of F, who can each carry M$_i$ pounds will be $O(NFM_i)$.
 
 \end{document}
