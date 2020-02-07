@@ -62,7 +62,7 @@ For the dynamic programming solution to the knapsack problem, we need to iterate
 \textsc{DP Knapsack$(W, wt[], val[], item)$}
 
 \begin{verbatim}
-    1 memo = [W + 1][i + 1]
+    1 memo = [W + 1][item + 1]
     2 for(i = 0; i < item + 1; i++) {
     3     for(w = 0; w < W + 1; w++)
     4         if(w == 0 || i == 0)
@@ -72,6 +72,7 @@ For the dynamic programming solution to the knapsack problem, we need to iterate
     8         else
     9             memo[i][w] = max(memo[i - 1][w],
     10                         val[i] + memo[i - 1][w - wt[i]])
+    11 return memo[W][item]
 \end{verbatim}
 
 \begin{verbatim}
@@ -216,6 +217,36 @@ These 4 graphs show loglog growth-rate comparisons of the dynamic programming an
 
 \subsection*{d)}
 
+For the data collection, I used nested loops to test different values of n and W for each algorithm.  The n loop goes in iterations of +2, between the values of 10 and 30.  The W loop does in iterations of 30, between 30 and 120.  I time and run each algorithm on the same randomly generated data sets with the n and W values.  This meant that I had tested each algorithm under 60 different conditions of n and W.  What I found was that increases of both n and W increased running time, but W seemed to effect the running time with a much greater magnitude.  Part of this is likely due to the fact that the W value gets much larger than n.  
+
 \section*{Problem 4}
+
+\subsection*{a)}
+
+This problem is almost identical to the knapsack problem, so the pseudo-code will resemble it quite a bit.  We've got a list of items, with corresponding weights and values.  The main difference between 0-1 knapsack and shopping spree is that instead of optimizing one knapsack, we're optimizing F knapsacks.  To implement this code, all we have to do is loop the knapsack algorithm F times, using each family member's corresponding max weight value.  Once the knapsack code has run once for each family member, we sum the value to get the total optimized value for this problem.
+
+\textsc{Shopping Spree(F[], wt[], val[], item):}
+    
+\begin{verbatim}
+    1  subtotals = [F.length()]
+    2  for(int f = 0; f < F.length(); f++)
+    3      memo[F[f]][item + 1]
+    4      for(int i = 0; i < item + 1; i++)
+    5          for(int w = 0; w < F[f]; w++)
+    6              if(w == 0 || i == 0)
+    7                  memo[i][w] = 0
+    8              else if (wt[i] > F[f])
+    9                  memo[i][w] = memo[i - 1][w]
+    10             else
+    11                 memo[i][w] = max(memo[i-1][w],
+    12                 val[i] + memo[i-1][w-wt[i]])
+    13     subtotals[f] = memo[F[f]][item]
+    14 return sum(subtotals)
+                    
+\end{verbatim}
+
+\subsection*{b)}
+
+Since dynamic programming algorithms memoize previous problems, each combination of family member, weight, and item only need to be checked once each.  Because of this, the running time given N items, a family size of F, who can each carry M$_i$ pounds will be $O(NFM_i)$
 
 \end{document}
