@@ -49,8 +49,8 @@ def recursion(W, wt, val, i):
         val[i - 1] + recursion(W-wt[i-1], wt, val, i - 1))
 
 # nested loop to test different Weight and total item values
-for W in range(30, 150, 30):
-    for i in range(10, 32, 2):
+for W in range(30, 120, 30):
+    for i in range(10, 28, 2):
         # initialize a wt and val array for the DP program
         wt_DP = []
         val_DP = []
