@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Homework 4}
+\author{Joshua Barringer \\ Prof. Schutfort }
+\date{21 February 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Road Trip}
+
+\subsection{}{}{}
+We can use a greedy algorithm to solve this problem in multiple steps.  From our current location, we will calculate the distances from our location to further hotels.  If we encounter a hotel that the distance is greater than d, we will not check any farther hotels.  From the results of hotels within driving distance, we will travel to the farthest one.
+
+\subsection{}{}{}
+\textsc{RoadTrip(d, hotelList[])}
+\begin{verbatim}
+    location = 0
+    while(location != len(hotelList) - 1)
+        
+\end{verbatim}
+
+\section{CLRS 16-1-2 Activity Selection Last-to-Start}
+
+\subsection{}{}{}
+
+If we chose to select the last-to-start activities instead of first-to-finish, then this would be a greedy algorithm because it does the same thing that the first-to-finish does: add an activity to the schedule that leave the most remaining time.  Both algorithms are greedy because they don't examine sub-problems, but take the optimal choice one at a time.
+
+Optimizing the schedule by adding the last activities to start should yield an equally optimized result as the opposite strategy because they have the same basic rule.  Both strategies greedily optimize the schedule by adding the activity that leaves the most remaining room in the schedule.  Whether you start at the beginning of the day and add the shortest and earliest activities, or start at the end of the dat and add the shortest and latest activities, the result will be the same.
+
+\section{MST}
+
+\section{Euclidean MST Implementation}
+
+\end{document}
+
