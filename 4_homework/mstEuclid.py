@@ -2,12 +2,16 @@ import math
 import time
 import sys
 
-# open file from argv
-try:
-    file = open(sys.argv[1], "r")
-# exit with error if file not found
-except:
-    print("No file named \"{}\" found".format(sys.argv[1]))
+if len(sys.argv) == 2:
+    # open file from argv
+    try:
+        file = open(sys.argv[1], "r")
+    # exit with error if file not found
+    except:
+        print("No file named \"{}\" found".format(sys.argv[1]))
+        quit()
+else :
+    print("usage: \"python3 mstEuclid.py <filename.txt>\"")
     quit()
 
 # Class that holds the points that make an edge,
