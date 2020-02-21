@@ -1,7 +1,7 @@
 import math
-import time
 import sys
 
+# error handling for input
 if len(sys.argv) == 2:
     # open file from argv
     try:
@@ -10,6 +10,7 @@ if len(sys.argv) == 2:
     except:
         print("No file named \"{}\" found".format(sys.argv[1]))
         quit()
+# if incorrect number of args, print command format
 else :
     print("usage: \"python3 mstEuclid.py <filename.txt>\"")
     quit()
