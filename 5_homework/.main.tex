@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\setlength{\parindent}{0cm}
+
+\title{CS325 Homework 5}
+\author{Joshua Barringer \\
+        Prof. Schutfort}
+\date{4 March 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{}
+
+    \subsection{If Y is NP-complete then so is X.}
+    
+    \textbf{false}
+    
+    We do not know what time category X is in, but we know Y is NP-complete.  X reducing to Y means that X cannot be more difficult than Y.  We know Y is difficult, but X reducing to Y doesn't give us enough information to conclude anything about X.
+
+    \subsection{If X is NP-complete then so is Y.}
+    
+    \textbf{false}
+    
+    This is not guaranteed because
+    
+    \subsection{If Y is NP-complete and X is in NP then X is NP-complete.}
+    
+    \textbf{false}
+    
+    Similarly to problem 1.a, there's not enough information to guarantee that X is NP-complete.  If all problems in NP reduce to Y, and X reduces to Y, then we still don't know whether all problems in NP reduce to X.
+    
+    \subsection{If X is NP-complete and Y is in NP then Y is NP-complete.}
+    
+    \textbf{true}
+    
+    If X reduces into Y in polynomial time, then X cannot be more than a polynomial factor harder than Y.  If X is NP-complete and Y is in NP, and Y is \underline{not} NP-complete, then X cannot be NP-complete either, since X can be solved using Y.  Because of this, Y much be NP-complete to not contradict the logic that X reduces to Y in polynomial time.
+    
+    \subsection{If X is in P, then Y is in P.}
+    
+    \textbf{false}
+    
+    If X is in P, then Y is not guaranteed to be in P.  X reducing to Y means that X is no more difficult than Y is, but it can be easier.  X reducing to Y does not mean that Y can reduce to X, so we cannot conclude anything about Y if we know that X is in P.
+    
+    \subsection{If Y is in P, then X is in P}
+    
+    \textbf{true}
+    
+    If we can solve Y efficiently, then since X reduces to Y in polynomial time, we use Y to solve X efficiently.  If Y can be solved in polynomial time, it follows that X must be solveable in polynomial time, given that X reduces to Y in polynomial time.
+    
+    \subsection{X and Y can't both be in NP.}
+
+\section{}
+
+\section{}
+
+    \subsection{}
+    
+    \subsection{}
+
+\end{document}

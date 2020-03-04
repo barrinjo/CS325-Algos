@@ -15,7 +15,7 @@ except:
 
 graph = []
 i = 0
-while i < 100:
+while i < size:
     temp = (random.randint(0,size), random.randint(0,size))
     if temp not in graph:
         graph.append(temp)
