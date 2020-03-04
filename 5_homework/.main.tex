@@ -14,45 +14,84 @@
 
 \section{}
 
-    \subsection{If Y is NP-complete then so is X.}
-    
-    \textbf{false}
-    
-    We do not know what time category X is in, but we know Y is NP-complete.  X reducing to Y means that X cannot be more difficult than Y.  We know Y is difficult, but X reducing to Y doesn't give us enough information to conclude anything about X.
+\subsection{If $Y$ is NP-complete then so is $X$.}
 
-    \subsection{If X is NP-complete then so is Y.}
-    
-    \textbf{false}
-    
-    This is not guaranteed because
-    
-    \subsection{If Y is NP-complete and X is in NP then X is NP-complete.}
-    
-    \textbf{false}
-    
-    Similarly to problem 1.a, there's not enough information to guarantee that X is NP-complete.  If all problems in NP reduce to Y, and X reduces to Y, then we still don't know whether all problems in NP reduce to X.
-    
-    \subsection{If X is NP-complete and Y is in NP then Y is NP-complete.}
-    
-    \textbf{true}
-    
-    If X reduces into Y in polynomial time, then X cannot be more than a polynomial factor harder than Y.  If X is NP-complete and Y is in NP, and Y is \underline{not} NP-complete, then X cannot be NP-complete either, since X can be solved using Y.  Because of this, Y much be NP-complete to not contradict the logic that X reduces to Y in polynomial time.
-    
-    \subsection{If X is in P, then Y is in P.}
-    
-    \textbf{false}
-    
-    If X is in P, then Y is not guaranteed to be in P.  X reducing to Y means that X is no more difficult than Y is, but it can be easier.  X reducing to Y does not mean that Y can reduce to X, so we cannot conclude anything about Y if we know that X is in P.
-    
-    \subsection{If Y is in P, then X is in P}
-    
-    \textbf{true}
-    
-    If we can solve Y efficiently, then since X reduces to Y in polynomial time, we use Y to solve X efficiently.  If Y can be solved in polynomial time, it follows that X must be solveable in polynomial time, given that X reduces to Y in polynomial time.
-    
-    \subsection{X and Y can't both be in NP.}
+\textbf{false}
+
+We do not know what time category $X$ is in, but we know $Y$ is NP-complete.  $X$ reducing to $Y$ means that $X$ cannot be more difficult than $Y$.  We know $Y$ is difficult, but $X$ reducing to $Y$ doesn't give us enough information to conclude anything about $X$.
+
+\subsection{If $X$ is NP-complete then so is $Y$.}
+
+\textbf{false}
+
+This is not guaranteed because $Y$ is not guaranteed to be in NP.  If $Y$ is in P, and $X$ reduces to $Y$, then NP = P, and all NP problems are polynomial.  Since this has not been disproven, $Y$ must be in NP for this to be true.
+
+\subsection{If $Y$ is NP-complete and $X$ is in NP then $X$ is NP-complete.}
+
+\textbf{false}
+
+Similarly to problem 1.a, there's not enough information to guarantee that $X$ is NP-complete.  If all problems in NP reduce to $Y$, and $X$ reduces to $Y$, then we still don't know whether all problems in NP reduce to $X$.
+
+\subsection{If $X$ is NP-complete and $Y$ is in NP then $Y$ is NP-complete.}
+
+\textbf{true}
+
+If $X$ reduces into $Y$ in polynomial time, then $X$ cannot be more than a polynomial factor harder than $Y$.  Because every problem in NP reduces to an NP-complete problem, every problem in NP reduces to $X$.  Because $X$ can be reduced to $Y$, every problem in NP can be reduced to $Y$.  Therefore, $Y$ must be NP-complete
+
+\subsection{If $X$ is in P, then $Y$ is in P.}
+
+\textbf{false}
+
+If $X$ is in P, then $Y$ is not guaranteed to be in P.  $X$ reducing to $Y$ means that $X$ is no more difficult than $Y$ is, but it can be easier.  $X$ reducing to $Y$ does not mean that $Y$ can reduce to $X$, so we cannot conclude anything about $Y$ if we know that $X$ is in P.
+
+\subsection{If $Y$ is in P, then $X$ is in P}
+
+\textbf{true}
+
+If we can solve $Y$ efficiently, then since $X$ reduces to $Y$ in polynomial time, we use $Y$ to solve $X$ efficiently.  If $Y$ can be solved in polynomial time, it follows that $X$ must be solveable in polynomial time, given that $X$ reduces to $Y$ in polynomial time.
+
+\subsection{$X$ and $Y$ can't both be in NP.}
 
 \section{}
+
+If \textsc{Ham-Cycle} reduces to \textsc{Ham-Path} in polynomial time, \textsc{Ham-Path} is in NP, and \textsc{Ham-Cycle} is NP-Complete, then it follows that \textsc{Ham-Path} is NP-complete.  To show that \textsc{Ham-Path} is NP-complete, we need to do two things:
+
+\begin{itemize}
+    \item First, we must show that \textsc{Ham-Path} is in NP
+    \item Second, we must show that we can reduce \textsc{Ham-Cycle} to \textsc{Ham-Path} in polynomial time
+\end{itemize}
+
+Doing this will satisfy the proof that \textsc{Ham-Path} is NP-complete.
+
+\subsection{}
+
+If we are given a set of edges, $E$, and a graph, $G$, then we can easily determine if the edges complete a Hamiltonian Path in polynomial time.  To show \textsc{Ham-Path} is in NP, we have to verify the path given.  We will start by finding an edge that shares a vertex with only one other edge; this means that it is either a start or end of the Hamiltonian path.  We now check if the path is Hamiltonian by iterating through the list of edges by related vertex.  If we encounter a vertex we've seen before, then we return no.  If we reach the end of the edge list without traveling to every vertex, then we return no.  If we reach the end of the edge list and every vertex has been visited, then we return yes.\\
+
+This will run in polynomial time, because finding the start of the Hamiltonian path will take at max n-1 iterations, and determining the validity of the path will take at max $n$ iterations.  The running time for this algorithm should be $T = O(n)$, which means that \textsc{Ham-Path} is in NP\\
+
+\textsc{Ham-Path(G[], E[])}
+
+\begin{verbatim}
+    1  loc = 0
+    2  index = 0
+    3  while(start-not-found)
+    4      if(E[index] has only 1 shared vertex)
+    5          loc = index
+    6  while(for int i = 0; i < E.length(); i ++)
+    7      if(E[loc].visited = false)
+    8          E[loc].visited = true
+    9      else
+    10         return false
+    11     loc = next edge
+    12 if(all-vertices-have-been-visited)
+    13     return true
+    14 else
+    15     return false
+\end{verbatim}
+
+\subsection{}
+
+Next, we have to show that \textsc{Ham-Cycle} can be reduced to \textsc{Ham-Path} in polynomial time.  Transforming a \textsc{Ham-Cycle} graph into a \textsc{Ham-Path} graph is a very simple task.  We take any vertex, $v$, in the \textsc{Ham-Cycle} graph, $G$, and duplicate it to create $v'$.
 
 \section{}
 
