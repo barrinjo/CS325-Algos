@@ -94,20 +94,17 @@ This will run in polynomial time, because finding the start of the Hamiltonian p
 
 Next, we have to show that \textsc{Ham-Cycle} can be reduced to \textsc{Ham-Path} in polynomial time.  Transforming a \textsc{Ham-Cycle} graph into a \textsc{Ham-Path} graph is a very simple task.  We take any vertex, $v$, in the \textsc{Ham-Cycle} graph, $G$, and duplicate it to create $v'$.  $v'$ has an edge connecting itself to every vertex that $v$ is connected to.  This is a short operation and can easily be done in at least polynomial time.  Once we have done this, the Hamiltonian Cycle validity can be decided the same way we do the Hamiltonian path.  If there exists a Hamiltonian path between $v$ and $v'$, then a Hamiltonian Cycle exists.\\
 
-\begin{tikzpicture}[
-% nolabel/.style={circle,inner sep=2pt,fill=black},
-label/.style={circle,draw = black, inner sep=2pt, fill=white},
-]
-  \node[label] (A) at (0,0) {};
-  \node[label] (B) at (0,2) {};
-  \node[label] (C) at (2,3) {};
-  \node[label] (D) at (4,0) {$v$};
+\begin{tikzpicture}[every node/.style={circle,draw = black, inner sep=3pt, fill=white},]
+  \node (A) at (0,0) {};
+  \node (B) at (0,2) {};
+  \node (C) at (2,3) {};
+  \node (D) at (4,0) {$v$};
   
-  \node[label] (a) at (6,0) {};
-  \node[label] (b) at (6,2) {};
-  \node[label] (c) at (8,3) {};
-  \node[label] (d) at (10,0) {$v$};
-  \node[label] (e) at (10,2) {$v'$};
+  \node (a) at (6,0) {};
+  \node (b) at (6,2) {};
+  \node (c) at (8,3) {};
+  \node (d) at (10,0) {$v$};
+  \node (e) at (10,2) {$v'$};
   
   \draw (a) -- (b)
         (b) -- (c)
@@ -172,6 +169,37 @@ To show that 4-Color is NP-complete, we need to show:
 \subsubsection{}
 
 We can reduce 3-Color to 4-Color by using the graph, $G$, for 3-Color, a copy of $G$, $G'$, for 4-Color.  We will add a new vertex with the 4th color, $a$, to $G'$, where $a$ is connected to every single other vertex in $G'$.  Since $a$ is the only graph in $G'$ that is the fourth color, if the 4-Color decision problem returns true, then the we know that $G$ passes 3-Color.  Conversely, if we have a 3-Color graph, $G$, that we know is a correct 3-Color, then the corresponding reduction to 4-Color, $G'$, will be a correct 4-Color graph.\\
+
+\begin{tikzpicture}[
+red/.style={circle,draw = black, inner sep=3pt, fill=red},
+blue/.style={circle,draw = black, inner sep=3pt, fill=blue},
+green/.style={circle, draw=black, inner sep=3pt, fill=yellow}
+]
+  \node[red] (A) at (0,0) {};
+  \node[blue] (B) at (0,2) {};
+  \node[red] (C) at (2,3) {};
+  \node[blue] (D) at (4,0) {};
+  
+  \node[red] (a) at (6,0) {};
+  \node[blue] (b) at (6,2) {};
+  \node[red] (c) at (8,3) {};
+  \node[blue] (d) at (10,0) {};
+  \node[green] (e) at (10,2) {$a$};
+  
+  \draw (A) -- (B)
+        (B) -- (C)
+        (C) -- (D)
+        (A) -- (D);
+            
+  \draw (a) -- (b)
+        (b) -- (c)
+        (c) -- (d)
+        (a) -- (d)
+        (a) -- (e)
+        (b) -- (e)
+        (c) -- (e)
+        (d) -- (e);
+\end{tikzpicture}
 
 Because we have shown that 4-Color is in NP, and 3-Color reduces to 4-Color in polynomial time, we can conclude that 4-Color is NP-Complete.
 
